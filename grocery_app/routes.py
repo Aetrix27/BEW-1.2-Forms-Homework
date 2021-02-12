@@ -30,7 +30,7 @@ def new_store():
         db.session.add(new_GroceryStore)
         db.session.commit()
         
-        flash('A new Grocery Store was created successfully')
+        flash('A new Grocery Store was successfully created')
         return redirect(url_for('main.store_detail', store_id=new_GroceryStore.id))
 
     return render_template('new_store.html', form=form)
@@ -38,15 +38,28 @@ def new_store():
 @main.route('/new_item', methods=['GET', 'POST'])
 def new_item():
     # TODO: Create a GroceryItemForm
-    #form = GroceryItemForm()
+    form = GroceryItemForm()
 
     # TODO: If form was submitted and was valid:
     # - create a new GroceryItem object and save it to the database,
     # - flash a success message, and
     # - redirect the user to the item detail page.
+    if form.validate_on_submit(): 
+        new_GroceryItem = GroceryItemForm(
+            price=form.price.data,
+            category=form.category.data,
+            photo_url=form.photo_url.data,
+            store=form.store.data
+
+        )
+        db.session.add(new_GroceryItem)
+        db.session.commit()
+        flash('A new Grocery Item was successfully created')
+        return redirect(url_for('main.item_detail'))
+
 
     # TODO: Send the form to the template and use it to render the form fields
-    return render_template('new_item.html')
+    return render_template('new_item.html', form=form)
 
 @main.route('/store/<store_id>', methods=['GET', 'POST'])
 def store_detail(store_id):
