@@ -66,7 +66,6 @@ def store_detail(store_id):
         store.title = (form.title.data)
         store.address = (form.address.data)
 
-
     db.session.add(store)
     db.session.commit()
 
@@ -80,11 +79,12 @@ def item_detail(item_id):
     item = GroceryItem.query.get(item_id)
     form = GroceryItemForm(obj=item)
 
-    if form.validate_on_submit(): 
-        item.price = (form.price.data,)
-        item.category = (form.category.data,)
-        item.photo_url = (form.photo_url.data,)
-        item.store = (form.store.data,)
+    if form.validate_on_submit():
+        item.name = (form.name.data) 
+        item.price = (form.price.data)
+        item.category = (form.category.data)
+        item.photo_url = (form.photo_url.data)
+        item.store = (form.store.data)
 
     db.session.add(item)
     db.session.commit()
