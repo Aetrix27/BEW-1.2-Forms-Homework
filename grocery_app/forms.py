@@ -8,7 +8,7 @@ class GroceryStoreForm(FlaskForm):
 
     title = StringField('Title:', validators=[DataRequired(), Length(min=1, max=70)])
     address = TextAreaField('Address:', validators=[DataRequired(), Length(min=5, max=100)])
-    submit = SubmitField('submit')
+    submit = SubmitField('Submit')
 
 class GroceryItemForm(FlaskForm):
 
@@ -17,4 +17,4 @@ class GroceryItemForm(FlaskForm):
     category = StringField('Category:', validators=[DataRequired(), Length(min=1, max=30)])
     photo_url = StringField('Photo URL:', validators=[DataRequired(), URL()])
     store = QuerySelectField('Store', query_factory=lambda: GroceryStore.query, allow_blank=False)
-    submit = SubmitField('submit')
+    submit = SubmitField('Submit')
