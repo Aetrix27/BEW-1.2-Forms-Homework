@@ -11,6 +11,7 @@
 
 <p><strong>Store:</strong> {{ item.store.title }}</p>
 
+<strong>Created By:</strong> {{ item.created_by }}
 
 <h2>Edit Item</h2>
 
@@ -58,5 +59,14 @@
     </fieldset>
 </form>
 
+<form method="POST" action="{{ url_for('main.add_to_shopping_list', item_id=item.id) }}">
+    {{ form.csrf_token }} 
+    <legend>
+        Add to Cart
+    </legend>
+    {{ form.submit }}
+
+    
+</form>
 
 {% endblock %}

@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SelectField, SubmitField, TextAreaField, FloatField
-from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField, PasswordField
+from wtforms import StringField, DateField, SelectField, SubmitField, TextAreaField, FloatField, PasswordField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import DataRequired, Length, URL, ValidationError
 from grocery_app.models import GroceryStore, ItemCategory
-from models import User
+from .models import User
 
 class GroceryStoreForm(FlaskForm):
 
@@ -17,10 +17,9 @@ class GroceryItemForm(FlaskForm):
     price = FloatField('Price:', validators=[DataRequired()])
     category = SelectField("Category:", choices = ItemCategory.choices())
     photo_url = StringField('Photo URL:', validators=[DataRequired(), URL()])
-    store = QuerySelectField('Store:', query_factory=lambda: GroceryStore.query, allow_blank=False)
+    store = QuerySelectField('Store:', query_factory=lambda: GroceryStore.query, allow_blank=False, get_label='title')
     
     submit = SubmitField('Submit')
-
 
 class SignUpForm(FlaskForm):
     username = StringField('User Name',
