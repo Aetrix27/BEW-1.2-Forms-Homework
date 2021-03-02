@@ -1,3 +1,3 @@
-from grocery_app import create_app
+from grocery_app import app
 
-app = create_app()
+app = app()
